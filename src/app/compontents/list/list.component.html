@@ -1,0 +1,15 @@
+<mat-card>
+  <div
+    class="d-flex align-items-center justify-content-between w-100"
+    [ngClass]="listData.color"
+  >
+    <h3>{{ listData.title }}</h3>
+    <div>
+      <mat-icon>compare_arrows</mat-icon>
+    </div>
+  </div>
+
+  <div *ngFor="let task of listData.tasks">
+    <app-task [tasks]="task"></app-task>
+  </div>
+</mat-card>
