@@ -1,5 +1,6 @@
+@import "/src/styles.scss";
+
 .board {
-  display: grid;
-  grid-template-columns: repeat(10, minmax(0, 1fr));
-  gap: 2.5rem;
+  display: flex;
+  flex-direction: row;
 }

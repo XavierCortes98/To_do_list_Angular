@@ -9,7 +9,9 @@ export const listsExample: List[] = [
     1,
     [
       { id: 1, title: 'prueba uno' },
-      { id: 2, title: 'prueba 2' },
+      { id: 2, title: 'prueba dos' },
+      { id: 3, title: 'prueba tres' },
+      { id: 4, title: 'prueba cuatro' },
     ],
     'green',
     false
@@ -21,8 +23,10 @@ export const listsExample: List[] = [
     new Date(),
     2,
     [
-      { id: 3, title: 'prueba tres' },
-      { id: 4, title: 'prueba cuatro' },
+      { id: 5, title: 'prueba cinco' },
+      { id: 6, title: 'prueba seis' },
+      { id: 7, title: 'prueba siete' },
+      { id: 8, title: 'prueba ocho' },
     ],
     'red',
     false

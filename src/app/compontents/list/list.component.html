@@ -1,15 +1,32 @@
-<mat-card>
+<mat-card class="card">
   <div
-    class="d-flex align-items-center justify-content-between w-100"
-    [ngClass]="listData.color"
+    class="d-flex align-items-center justify-content-between w-100 pt-3 px-3 list-header"
   >
-    <h3>{{ listData.title }}</h3>
+    <h3 style="font-size: 16px">{{ listData.title }}</h3>
     <div>
       <mat-icon>compare_arrows</mat-icon>
     </div>
   </div>
 
-  <div *ngFor="let task of listData.tasks">
-    <app-task [tasks]="task"></app-task>
+  <div
+    [cdkDropListData]="this"
+    cdkDropList
+    (cdkDropListDropped)="moveTask($event)"
+    class="p-3"
+  >
+    <app-task
+      *ngFor="let task of listData.tasks"
+      cdkDrag
+      class="d-flex w-100 p-1"
+      (taskToRemove)="removeTask($event)"
+      [task]="task"
+    ></app-task>
+  </div>
+
+  <div class="px-3 pb-1">
+    <button mat-button class="w-100 justify-content-start test">
+      <mat-icon class="small-button">add</mat-icon>
+      <span style="font-size: 16px">Añade una tarjeta</span>
+    </button>
   </div>
 </mat-card>

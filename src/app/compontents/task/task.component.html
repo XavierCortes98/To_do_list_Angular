@@ -1,3 +1,6 @@
-<mat-card appearance="outlined" class="list-card">
-  <span class="bald">{{ tasks.title }}</span>
+<mat-card appearance="outlined" class="task-card w-100">
+  <span class="bald">{{ task.title }}</span>
+  <button mat-icon-button class="small-button" (click)="removeTask()">
+    <mat-icon style="font-size: 16px">close</mat-icon>
+  </button>
 </mat-card>

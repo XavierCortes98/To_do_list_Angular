@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from 'src/app/models/task.model';
 
 @Component({
@@ -7,5 +7,10 @@ import { Task } from 'src/app/models/task.model';
   styleUrls: ['./task.component.scss'],
 })
 export class TaskComponent {
-  @Input() tasks!: Task;
+  @Input() task!: Task;
+  @Output() taskToRemove: EventEmitter<Task> = new EventEmitter<Task>();
+
+  removeTask() {
+    this.taskToRemove.emit(this.task);
+  }
 }
