@@ -1,1 +1,14 @@
-<p>home works!</p>
+<div class="grid-container">
+  <div *ngFor="let board of boardList" class="grid-item">
+    <a class="d-flex w-100 position-relative">
+      <span class="board-title p-2">{{ board.name }}</span>
+      <img src="assets/foto1.jpg" alt="Imagen" />
+      <button mat-button class="position-absolute bottom-0 end-0 m-2">
+        <mat-icon
+          [ngClass]="board.isFavorite ? 'favorite-active' : 'not-favorite'"
+          >favorite</mat-icon
+        >
+      </button>
+    </a>
+  </div>
+</div>

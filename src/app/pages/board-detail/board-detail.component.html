@@ -1,5 +1,7 @@
-<div class="board p-2" cdkDropListGroup>
-  <div *ngFor="let list of lists" class="pe-4">
-    <app-list [listData]="list"></app-list>
-  </div>
+<div class="d-flex flex-row p-2" cdkDropListGroup>
+  <app-list
+    *ngFor="let list of lists"
+    class="pe-4"
+    [listData]="list"
+  ></app-list>
 </div>

@@ -1,9 +1,9 @@
 .task-card {
-  width: 100%;
-  display: flex;
   flex-direction: row;
   align-items: center;
-  width: fit-content;
+  width: 100%;
+  max-width: 230px;
+  height: fit-content;
   padding: 8px 12px 4px;
   justify-content: space-between;
   box-shadow: var(
@@ -12,6 +12,9 @@
     0px 0px 1px #091e424f
   );
   border-radius: 8px;
+  &:hover {
+    outline: #388bff auto 2px;
+  }
 }
 
 .small-button {

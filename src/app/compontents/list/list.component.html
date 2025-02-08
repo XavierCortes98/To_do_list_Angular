@@ -1,32 +1,72 @@
-<mat-card class="card">
+<mat-card class="card" [class.collapsed]="isCollapsed">
   <div
-    class="d-flex align-items-center justify-content-between w-100 pt-3 px-3 list-header"
+    class="d-flex align-items-center justify-content-between pt-2 px-3 list-header"
+    [class.collapsed]="isCollapsed"
   >
-    <h3 style="font-size: 16px">{{ listData.title }}</h3>
-    <div>
+    <h3 class="fs-6" [class.text_collapsed]="isCollapsed">
+      {{ listData.title }}
+    </h3>
+    <button class="btn rounded-5" (click)="toggleCollapse()">
       <mat-icon>compare_arrows</mat-icon>
-    </div>
+    </button>
+    <span *ngIf="isCollapsed">{{ listData.tasks.length }}</span>
   </div>
 
   <div
+    *ngIf="!isCollapsed"
     [cdkDropListData]="this"
     cdkDropList
     (cdkDropListDropped)="moveTask($event)"
-    class="p-3"
+    class="px-3 pb-1 pt-3"
   >
     <app-task
       *ngFor="let task of listData.tasks"
       cdkDrag
-      class="d-flex w-100 p-1"
+      class="d-flex p-1"
       (taskToRemove)="removeTask($event)"
       [task]="task"
     ></app-task>
   </div>
 
-  <div class="px-3 pb-1">
-    <button mat-button class="w-100 justify-content-start test">
-      <mat-icon class="small-button">add</mat-icon>
-      <span style="font-size: 16px">Añade una tarjeta</span>
+  <div
+    *ngIf="!isCollapsed"
+    class="px-3 pb-1"
+    clickOutside
+    (clickOutside)="onClickOutside()"
+  >
+    <button
+      *ngIf="!showInput"
+      mat-button
+      class="w-100 rounded-4"
+      (click)="openInput($event)"
+    >
+      <mat-icon>add</mat-icon>
+      <span class="add_card_text">Añade una tarjeta</span>
     </button>
+
+    <div
+      *ngIf="showInput"
+      class="d-flex align-items-start flex-column gap-2 p-2"
+    >
+      <textarea
+        class="form-control"
+        placeholder="Introduzca la tarea"
+        [(ngModel)]="cardTitle"
+        (input)="adjustHeight($event)"
+        rows="2"
+        (keyup.enter)="addTask()"
+        autofocus
+      ></textarea>
+
+      <div class="d-flex align-items-center gap-2">
+        <button mat-raised-button color="primary" (click)="addTask()">
+          Añadir
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-button (click)="toggleShowInput(true)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
   </div>
 </mat-card>

@@ -1,0 +1,35 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.grid-item mat-icon {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.grid-item:hover mat-icon {
+  opacity: 1;
+}
+
+.grid-item img {
+  border-radius: 16px;
+  width: 100%;
+  height: auto;
+}
+
+.board-title {
+  width: 100%;
+  position: absolute;
+  color: white;
+  font-size: 32px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 1);
+}
+
+.favorite-active {
+  color: red;
+}
+.not-favorite {
+  color: white;
+}

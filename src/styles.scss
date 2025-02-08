@@ -6,5 +6,10 @@ html,
 body {
   height: 100%;
   margin: 0;
-  overflow: scroll;
+  overflow: auto;
+}
+
+cdk-drag-placeholder {
+  opacity: 0.3;
+  border: 2px dashed #007bff;
 }
