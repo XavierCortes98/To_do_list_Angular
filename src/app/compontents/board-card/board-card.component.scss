@@ -1,0 +1,76 @@
+.grid-item mat-icon {
+  opacity: 0;
+  transition: opacity 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.grid-item button {
+  position: relative;
+  z-index: 2;
+}
+
+.grid-item:hover mat-icon {
+  opacity: 1;
+}
+
+.grid-item img {
+  border-radius: 4px;
+  width: 100%;
+  height: auto;
+}
+
+.board-title {
+  z-index: 2;
+  width: 100%;
+  position: absolute;
+  color: white;
+  font-size: 32px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 1);
+}
+
+.favorite-active {
+  color: red;
+  animation: heartBeat 0.3s ease-in-out;
+}
+.not-favorite {
+  animation: heartBeatOff 0.3s ease-in-out;
+  color: white;
+}
+
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes heartBeatOff {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.grid-item a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0); // transparent by default
+  transition: background 0.3s ease;
+  z-index: 1; // place it behind your board title and button
+}
+
+/* Change the overlay's background on hover */
+.grid-item:hover a::before {
+  background: rgba(0, 0, 0, 0.2); // black overlay at 20% opacity
+}

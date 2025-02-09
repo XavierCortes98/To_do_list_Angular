@@ -33,3 +33,28 @@
 .not-favorite {
   color: white;
 }
+
+.add-board {
+  width: 100%;
+  height: 100%;
+  background-color: #dcdfe4;
+}
+
+.custom-menu {
+  min-width: 300px; /* Ajusta el ancho */
+  padding: 16px; /* Espaciado interno */
+}
+
+/* Hace que el formulario dentro del menú tenga margen */
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espaciado entre elementos */
+}
+
+.menu-container input {
+  width: 100%; /* Que el input use todo el ancho disponible */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
