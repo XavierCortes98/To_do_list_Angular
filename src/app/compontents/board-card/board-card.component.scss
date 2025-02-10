@@ -23,7 +23,7 @@
   width: 100%;
   position: absolute;
   color: white;
-  font-size: 32px;
+  font-size: 3vw;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 1);
 }
 
@@ -65,12 +65,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0); // transparent by default
+  background: rgba(0, 0, 0, 0);
   transition: background 0.3s ease;
-  z-index: 1; // place it behind your board title and button
+  z-index: 1;
 }
 
-/* Change the overlay's background on hover */
 .grid-item:hover a::before {
-  background: rgba(0, 0, 0, 0.2); // black overlay at 20% opacity
+  background: rgba(0, 0, 0, 0.2);
 }
