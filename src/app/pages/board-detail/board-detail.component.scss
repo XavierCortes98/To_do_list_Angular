@@ -1,1 +1,33 @@
+.add-button {
+  display: flex;
+  flex-direction: row;
+  border-radius: 16px;
+  background-color: rgba(241, 242, 244, 0.3);
+  height: fit-content;
+  color: white;
+  width: 270px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 1);
+  border: none;
+  transition: background-color 0.3s ease;
 
+  &:hover {
+    background-color: rgba(241, 242, 244, 0.7);
+  }
+}
+
+.wrapper {
+  background-image: url("../../../assets/foto1.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+}
+
+.input {
+  width: 270px;
+  display: flex;
+  background-color: #f1f2f4;
+  flex-direction: column;
+  height: fit-content;
+  border-radius: 16px;
+}

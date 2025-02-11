@@ -7,17 +7,18 @@ import { NewBoardComponent } from './compontents/new-board/new-board.component';
 import { ClickOutsideDirective } from './directive/click-outside.directive';
 import { ListComponent } from './compontents/list/list.component';
 import { TaskComponent } from './compontents/task/task.component';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { HomeComponent } from './pages/home/home.component';
 
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatInputModule } from '@angular/material/input';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { HttpClientModule } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -29,15 +30,17 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     ListComponent,
     TaskComponent,
-    BoardDetailComponent,
     HomeComponent,
-    ClickOutsideDirective,
-    BoardCardComponent,
     NewBoardComponent,
+    BoardCardComponent,
+    BoardDetailComponent,
+    ClickOutsideDirective,
   ],
   imports: [
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
     AppRoutingModule,
     TextFieldModule,
     MatButtonModule,
@@ -49,9 +52,10 @@ import { FormsModule } from '@angular/forms';
     MatCardModule,
     MatIconModule,
     FormsModule,
-    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

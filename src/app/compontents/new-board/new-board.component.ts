@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { BoardService } from 'src/app/services/board.service';
 
 @Component({
   selector: 'app-new-board',
@@ -12,7 +13,8 @@ export class NewBoardComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<NewBoardComponent>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private boardService: BoardService
   ) {}
 
   ngOnInit(): void {
@@ -27,6 +29,7 @@ export class NewBoardComponent implements OnInit {
 
   onCreate(): void {
     if (this.newBoardForm.valid) {
+      this.boardService.createBoard(this.newBoardForm.value).subscribe();
       this.dialogRef.close(this.newBoardForm.value);
     }
   }

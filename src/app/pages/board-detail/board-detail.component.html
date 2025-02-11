@@ -1,7 +1,40 @@
-<div class="d-flex flex-row p-2" cdkDropListGroup>
+<div class="d-flex flex-row p-2 wrapper" cdkDropListGroup>
   <app-list
     *ngFor="let list of lists"
     class="pe-4"
     [listData]="list"
   ></app-list>
+
+  <div
+    clickOutside
+    (clickOutside)="onClickOutside()"
+    style="height: fit-content"
+  >
+    <button
+      *ngIf="!showInput"
+      class="add-button p-2 gap-2"
+      (click)="openInput($event)"
+    >
+      <mat-icon>add</mat-icon>
+      <span>Añade otra lista</span>
+    </button>
+
+    <div *ngIf="showInput" class="input p-2 gap-2">
+      <input
+        type="text"
+        class="form-control w-100"
+        [(ngModel)]="listTitle"
+        placeholder="Introduce el nombre de la lista"
+        autofocus
+      />
+      <div class="d-flex align-items-center">
+        <button mat-raised-button color="primary" (click)="addList()">
+          Añadir Lista
+        </button>
+        <button mat-button (click)="toggleInput()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
