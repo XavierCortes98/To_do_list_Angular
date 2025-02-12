@@ -15,7 +15,7 @@ const boardsRoutes = (server, router) => {
 
   server.get("/boards", verifyToken, (req, res) => {
     const user_id = req.user.userId;
-    const userBoards = db.get("boards").filter().filter({ user_id }).value();
+    const userBoards = db.get("boards").filter({ user_id }).value();
     console.log(req.user);
 
     return res.status(201).json(userBoards);

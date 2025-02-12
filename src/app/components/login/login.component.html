@@ -1,0 +1,90 @@
+<div class="pt-3 px-3">
+  <h2>{{ isLogin ? "Iniciar sesión" : "Registrarse" }}</h2>
+  <mat-dialog-content>
+    <form
+      [formGroup]="authForm"
+      class="d-flex flex-column gap-2"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="d-flex flex-column w-75 align-items-start gap-2">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          formControlName="email"
+          required
+        />
+        <div
+          *ngIf="
+            authForm.get('email')?.invalid && authForm.get('email')?.touched
+          "
+        >
+          <p class="error">Email inválido</p>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column w-75 align-items-start gap-2">
+        <label for="password">Contraseña</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          formControlName="password"
+          required
+        />
+        <div
+          *ngIf="
+            authForm.get('password')?.invalid &&
+            authForm.get('password')?.touched
+          "
+        >
+          <p class="error">Mínimo 6 caracteres</p>
+        </div>
+      </div>
+
+      <!-- Confirmar contraseña solo en registro -->
+      <div
+        *ngIf="!isLogin"
+        class="d-flex flex-column w-75 align-items-start gap-2"
+      >
+        <label for="confirmPassword">Confirma contraseña</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          class="form-control"
+          formControlName="confirmPassword"
+          required
+        />
+        <div
+          *ngIf="
+            authForm.hasError('notMatching') &&
+            authForm.get('confirmPassword')?.touched
+          "
+        >
+          <p class="error">Las contraseñas no coinciden</p>
+        </div>
+      </div>
+
+      <button mat-button type="button" (click)="switchMode()">
+        {{
+          isLogin
+            ? "No tienes una cuenta? Regístrate"
+            : "Ya tienes una cuenta? Inicia sesión"
+        }}
+      </button>
+
+      <mat-dialog-actions class="w-100 justify-content-end">
+        <button mat-button type="button" (click)="onCancel()">Cancelar</button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="authForm.invalid"
+        >
+          {{ isLogin ? "Iniciar sesión" : "Crear cuenta" }}
+        </button>
+      </mat-dialog-actions>
+    </form>
+  </mat-dialog-content>
+</div>

@@ -17,7 +17,7 @@
     [cdkDropListData]="this"
     cdkDropList
     (cdkDropListDropped)="moveTask($event)"
-    class="px-3 pb-1 pt-3"
+    class="px-3 pb-1 pt-2"
   >
     <app-task
       *ngFor="let task of listData.tasks"
@@ -30,7 +30,7 @@
 
   <div
     *ngIf="!isCollapsed"
-    class="px-3 pb-1"
+    class="px-2 pb-1"
     clickOutside
     (clickOutside)="onClickOutside()"
   >
@@ -46,7 +46,7 @@
 
     <div
       *ngIf="showInput"
-      class="d-flex align-items-start flex-column gap-2 p-2"
+      class="d-flex align-items-start flex-column gap-2 px-2 pb-2"
     >
       <textarea
         class="form-control"

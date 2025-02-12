@@ -1,10 +1,11 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { NewBoardComponent } from 'src/app/compontents/new-board/new-board.component';
+import { NewBoardComponent } from 'src/app/components/new-board/new-board.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { Board } from 'src/app/models/board.model';
 import { BoardService } from 'src/app/services/board.service';
+import { LoginComponent } from 'src/app/components/login/login.component';
 
 @Component({
   selector: 'app-home',
@@ -13,8 +14,9 @@ import { BoardService } from 'src/app/services/board.service';
 })
 export class HomeComponent {
   boardList: Board[] = [];
-
   newBoardForm: FormGroup = this.fb.group({});
+
+  isLogged = false;
 
   constructor(
     private fb: FormBuilder,
@@ -24,14 +26,37 @@ export class HomeComponent {
   ) {}
 
   ngOnInit(): void {
-    this.boardService.getBoards().subscribe((boards) => {
-      this.boardList = boards;
-      console.log(this.boardList);
-    });
+    this.isLogged = this.authService.isLogged();
+    if (this.isLogged) {
+      this.boardService.getBoards().subscribe((boards) => {
+        this.boardList = boards;
+      });
+    }
 
     this.newBoardForm = this.fb.group({
       title: ['', Validators.required],
       // img: ['', Validators.required],
+    });
+  }
+
+  openLoginModal(): void {
+    const dialogRef = this.dialog.open(LoginComponent, { width: '400px' });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!result) return;
+
+      this.authService.login(result).subscribe((success) => {
+        if (success) {
+          this.isLogged = this.authService.isLogged();
+          this.loadBoards();
+        }
+      });
+    });
+  }
+
+  private loadBoards(): void {
+    this.boardService.getBoards().subscribe((boards) => {
+      this.boardList = boards;
     });
   }
 
@@ -42,14 +67,19 @@ export class HomeComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log('Nuevo tablero:', result);
         this.boardList.push({
-          name: result.title,
+          title: result.title,
           image: 'abc',
           isFavorite: false,
         });
       }
     });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.isLogged = this.authService.isLogged();
+    this.boardList = [];
   }
 
   register() {

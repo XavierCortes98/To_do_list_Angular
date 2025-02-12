@@ -1,6 +1,6 @@
 export interface Board {
   id?: string;
-  name: string;
+  title: string;
   image: string;
   isFavorite: boolean;
 }

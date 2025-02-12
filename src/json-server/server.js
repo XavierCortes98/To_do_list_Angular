@@ -3,8 +3,9 @@ import express from "express";
 import cors from "cors";
 
 import boardsRoutes from "./src/boards.js";
-import listRoutes from "./src/boards.js";
+import listRoutes from "./src/lists.js";
 import userRoutes from "./src/users.js";
+import taskRoutes from "./src/tasks.js";
 
 const server = express();
 const router = jsonServer.router("db.json");
@@ -17,6 +18,7 @@ server.use(express.json());
 userRoutes(server, router);
 boardsRoutes(server, router);
 listRoutes(server, router);
+taskRoutes(server, router);
 
 server.use(router);
 

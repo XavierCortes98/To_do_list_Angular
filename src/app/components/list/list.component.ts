@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { List } from 'src/app/models/list.model';
 import { Task } from 'src/app/models/task.model';
 import { KanbanService } from 'src/app/services/kanban.service';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-list',
@@ -20,7 +21,10 @@ export class ListComponent {
   isCollapsed = false;
   cardTitle = '';
 
-  constructor(private kanbanService: KanbanService) {}
+  constructor(
+    private kanbanService: KanbanService,
+    private taskService: TaskService
+  ) {}
 
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;
@@ -43,6 +47,9 @@ export class ListComponent {
   }
 
   removeTask(task: Task) {
+    this.taskService
+      .deleteTask(this.listData.id, task.id!)
+      .subscribe((a) => console.log(a));
     this.listData.tasks = this.listData.tasks.filter((t) => t.id !== task.id);
   }
 
@@ -68,9 +75,11 @@ export class ListComponent {
   addTask() {
     if (!this.cardTitle.trim()) return;
 
-    this.listData.tasks.push({
-      title: this.cardTitle,
-    });
+    this.taskService
+      .postTask(this.cardTitle, this.listData.id)
+      .subscribe((response) => {
+        this.listData.tasks.push(response.newTask);
+      });
     this.cardTitle = '';
     this.toggleShowInput();
   }

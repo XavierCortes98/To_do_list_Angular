@@ -21,21 +21,27 @@ export class BoardDetailComponent implements OnInit {
 
   ngOnInit() {
     this.boardId = this.route.snapshot.paramMap.get('boardId')!;
-    this.listService.getBoards(this.boardId).subscribe((lists) => {
+    this.listService.getLists(this.boardId).subscribe((lists) => {
       this.lists = lists;
+      console.log('board get', lists);
     });
   }
 
   addList() {
     if (!this.listTitle.trim()) return;
+    this.listService
+      .postList(this.listTitle, this.boardId)
+      .subscribe((response) => {
+        console.log(response);
+        this.lists.push({
+          id: response.newList.id,
+          title: response.newList.title,
+          color: 'gray',
+          isArchived: false,
+          tasks: [],
+        });
+      });
 
-    this.lists.push({
-      id: '',
-      title: this.listTitle,
-      color: 'gray',
-      isArchived: false,
-      tasks: [],
-    });
     this.clearTitle();
   }
 

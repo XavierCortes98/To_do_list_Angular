@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 import { TokenService } from './token.service';
 
 @Injectable({
@@ -13,19 +13,26 @@ export class AuthService {
   constructor(private http: HttpClient, private tokenService: TokenService) {}
 
   login(user: User) {
-    return this.http
-      .post(`${this.apiUrl}/login`, {
-        email: user.email,
-        password: user.password,
+    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, user).pipe(
+      tap((response) => {
+        this.tokenService.saveToken(response.token);
+      }),
+      catchError((error) => {
+        console.error('Error en el login:', error);
+        return of(null); // Retorna un Observable con `null` para evitar fallos
       })
-      .subscribe((response: any) => {
-        const tokenResponse = response as { token: string };
-        console.log(tokenResponse);
-        this.tokenService.saveToken(tokenResponse.token);
-      });
+    );
   }
 
   register(user: User): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, user);
+  }
+
+  logout() {
+    this.tokenService.removeToken();
+  }
+
+  isLogged(): boolean {
+    return this.tokenService.isAuthenticated();
   }
 }

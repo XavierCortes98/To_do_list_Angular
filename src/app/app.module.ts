@@ -2,11 +2,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { BoardDetailComponent } from './pages/board-detail/board-detail.component';
-import { BoardCardComponent } from './compontents/board-card/board-card.component';
-import { NewBoardComponent } from './compontents/new-board/new-board.component';
+import { BoardCardComponent } from './components/board-card/board-card.component';
+import { NewBoardComponent } from './components/new-board/new-board.component';
 import { ClickOutsideDirective } from './directive/click-outside.directive';
-import { ListComponent } from './compontents/list/list.component';
-import { TaskComponent } from './compontents/task/task.component';
+import { ListComponent } from './components/list/list.component';
+import { TaskComponent } from './components/task/task.component';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { HomeComponent } from './pages/home/home.component';
 
@@ -24,6 +24,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { FormsModule } from '@angular/forms';
     BoardCardComponent,
     BoardDetailComponent,
     ClickOutsideDirective,
+    LoginComponent,
   ],
   imports: [
     BrowserAnimationsModule,

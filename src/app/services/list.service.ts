@@ -11,9 +11,13 @@ export class ListService {
 
   constructor(private http: HttpClient) {}
 
-  getBoards(boardId: string): Observable<List[]> {
+  getLists(boardId: string): Observable<List[]> {
     return this.http.get<List[]>(`${this.apiUrl}/lists`, {
       params: { boardId },
     });
+  }
+
+  postList(title: string, boardId: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/lists`, { title, boardId });
   }
 }

@@ -1,0 +1,17 @@
+<div class="grid-item position-relative">
+  <a [routerLink]="['/', boardInfo.id]" class="d-flex w-100 position-relative">
+    <span class="board-title p-2">{{ boardInfo.title }}</span>
+    <img src="assets/foto1.jpg" alt="Imagen" />
+  </a>
+  <button
+    mat-button
+    class="position-absolute bottom-0 end-0 m-0"
+    (click)="toggleFav()"
+  >
+    <mat-icon
+      [ngClass]="boardInfo.isFavorite ? 'favorite-active' : 'not-favorite'"
+    >
+      favorite
+    </mat-icon>
+  </button>
+</div>
