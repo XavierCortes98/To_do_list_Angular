@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,10 +17,11 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class LoginComponent implements OnInit {
   isLogin = true;
   authForm!: FormGroup;
-
+  errorMsg = '';
   constructor(
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<LoginComponent>
+    private dialogRef: MatDialogRef<LoginComponent>,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -53,11 +55,21 @@ export class LoginComponent implements OnInit {
 
     const { email, password } = this.authForm.value;
 
-    if (this.isLogin) {
-      console.log('Iniciando sesión con:', email, password);
-    } else {
-      console.log('Registrando usuario con:', email, password);
-    }
+    this.authService
+      .login({
+        email,
+        password,
+      })
+      .subscribe({
+        next: (response) => {
+          console.log('exito');
+        },
+        error: (error) => {
+          console.error('error:', error);
+          this.errorMsg = error;
+        },
+      });
+
     this.dialogRef.close(this.authForm.value);
   }
 

@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
-import { catchError, Observable, of, tap } from 'rxjs';
+import { catchError, Observable, of, tap, throwError } from 'rxjs';
 import { TokenService } from './token.service';
 
 @Injectable({
@@ -14,12 +14,11 @@ export class AuthService {
 
   login(user: User) {
     return this.http.post<{ token: string }>(`${this.apiUrl}/login`, user).pipe(
+      catchError(this.handleError),
       tap((response) => {
-        this.tokenService.saveToken(response.token);
-      }),
-      catchError((error) => {
-        console.error('Error en el login:', error);
-        return of(null); // Retorna un Observable con `null` para evitar fallos
+        if (response.token) {
+          this.tokenService.saveToken(response.token);
+        }
       })
     );
   }
@@ -34,5 +33,16 @@ export class AuthService {
 
   isLogged(): boolean {
     return this.tokenService.isAuthenticated();
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'Ocurrió un error';
+
+    if (error.status === 401) {
+      errorMessage = error.error.message; // "Usuario no encontrado" o "Contraseña incorrecta"
+      console.log('service:', errorMessage);
+    }
+
+    return throwError(errorMessage);
   }
 }

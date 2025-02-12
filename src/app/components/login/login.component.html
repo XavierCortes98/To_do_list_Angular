@@ -6,6 +6,8 @@
       class="d-flex flex-column gap-2"
       (ngSubmit)="onSubmit()"
     >
+      <span *ngIf="errorMsg" class="error">{{ errorMsg }}</span>
+
       <div class="d-flex flex-column w-75 align-items-start gap-2">
         <label for="email">Email</label>
         <input
