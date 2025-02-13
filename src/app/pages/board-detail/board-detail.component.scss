@@ -1,3 +1,17 @@
+.return-button {
+  display: flex;
+  flex-direction: row;
+  color: black;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 1);
+  background-color: rgba(255, 255, 255, 0.5);
+  width: fit-content;
+  transition: all 0.3s ease;
+  border-radius: 16px;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+}
+
 .add-button {
   display: flex;
   flex-direction: row;
@@ -20,7 +34,9 @@
   background-image: url("../../../assets/foto1.jpg");
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
   height: 100%;
+  overflow: auto;
 }
 
 .input {

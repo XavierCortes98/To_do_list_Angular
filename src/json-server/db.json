@@ -64,24 +64,6 @@
       "isArchived": false,
       "boardId": "1",
       "tasks": []
-    },
-    {
-      "id": "39bd0126-5233-49f9-bb1e-06e9e508212f",
-      "title": "dasdasd",
-      "createdDate": "2025-02-13T18:28:54.471Z",
-      "color": "gray",
-      "isArchived": false,
-      "boardId": "1",
-      "tasks": []
-    },
-    {
-      "id": "0986cca9-170c-4f85-bb72-b671a2979524",
-      "title": "dasdas",
-      "createdDate": "2025-02-13T18:28:56.455Z",
-      "color": "gray",
-      "isArchived": false,
-      "boardId": "1",
-      "tasks": []
     }
   ],
   "tasks": []
