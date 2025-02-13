@@ -1,5 +1,5 @@
 import { createToken, hashPassword, comparePassword } from "./auth.js";
-
+import { v4 as uuidv4 } from "uuid";
 const userRoutes = (server, router) => {
   const db = router.db;
 
@@ -19,7 +19,11 @@ const userRoutes = (server, router) => {
     const hashedPassword = hashPassword(password);
     db.get("users").push({ id, email, password: hashedPassword }).write();
 
-    return res.status(201).json({ message: "Usuario registrado con éxito" });
+    const token = createToken({ email, userId: id });
+
+    return res
+      .status(201)
+      .json({ message: "Usuario registrado con éxito", token });
   });
 
   server.post("/login", (req, res) => {

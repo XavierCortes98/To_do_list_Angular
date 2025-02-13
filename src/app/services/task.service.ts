@@ -14,8 +14,12 @@ export class TaskService {
     return this.http.post<any>(`${this.apiUrl}/tasks`, { taskTitle, listId });
   }
 
-  deleteTask(listId: string, taskId: string): Observable<any> {
-    const body = { taskId, listId };
+  deleteTask(taskId: string): Observable<any> {
+    const body = { taskId };
     return this.http.delete(`${this.apiUrl}/tasks`, { body });
+  }
+
+  moveTask(newListId: string, taskId: string) {
+    return this.http.put(`${this.apiUrl}/tasks`, { newListId, taskId });
   }
 }

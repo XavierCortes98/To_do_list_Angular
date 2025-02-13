@@ -18,32 +18,48 @@ const taskRoutes = (server, router) => {
     const newTask = {
       id: uuidv4(),
       title: taskTitle,
+      listId,
     };
 
-    db.get("lists").find({ id: listId }).get("tasks").push(newTask).write();
+    db.get("tasks").push(newTask).write();
 
     return res.status(201).json({ message: "Tarea agregada", newTask });
   });
 
   server.delete("/tasks", verifyToken, (req, res) => {
-    const { listId, taskId } = req.body;
-    if (!listId || !taskId) {
+    const { taskId } = req.body;
+    if (!taskId) {
       return res.status(400).json({ message: "Faltan datos" });
     }
 
-    const list = db.get("lists").find({ id: listId }).value();
-    if (!list) {
-      return res.status(404).json({ message: "Lista no encontrada" });
+    const task = db.get("tasks").remove({ id: taskId }).write();
+
+    return res
+      .status(200)
+      .json({ message: "Tarea eliminada correctamente", task });
+  });
+
+  server.put("/tasks", verifyToken, (req, res) => {
+    const { taskId, newListId } = req.body;
+
+    if (!taskId || !newListId) {
+      return res.status(400).json({ message: "Faltan datos" });
+    }
+
+    const newList = db.get("lists").find({ id: newListId }).value();
+    if (!newList) {
+      return res.status(404).json({ message: "Nueva lista no encontrada" });
     }
 
     const task = db
-      .get("lists")
-      .find({ id: listId })
       .get("tasks")
-      .remove({ id: taskId })
+      .find({ id: taskId })
+      .assign({ listId: newListId })
       .write();
 
-    return res.status(200).json({ message: "Tarea eliminada correctamente" });
+    return res
+      .status(200)
+      .json({ message: "Tarea actualizada correctamente", task });
   });
 };
 

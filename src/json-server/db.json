@@ -10,6 +10,11 @@
       "id": "dafc0649-def0-4cf8-8ad3-741f06b86818",
       "email": "b@gmail.com",
       "password": "$2a$08$3vYWAnCos5s1GUakSV6e1.B6q.7uCSWQ2KYjIqNagtuzy8tZ5g.Wa"
+    },
+    {
+      "id": "c947b609-eeda-4e55-8782-8ccbf08f6468",
+      "email": "c@gmail.com",
+      "password": "$2a$08$ph1lG6DetHzBZMLC8MybguoZhQ0fmkh5gVqaxJbbf3AuEUw2hA5dG"
     }
   ],
   "boards": [
@@ -31,30 +36,53 @@
       "createdDate": "2024-02-10T12:00:00Z",
       "color": "#ff5733",
       "isArchived": false,
-      "boardId": "fb6650e3-50a8-4272-825e-79b85afa7436",
-      "tasks": [
-        {
-          "id": 1,
-          "title": "Configurar proyecto"
-        },
-        {
-          "id": 2,
-          "title": "Crear componentes"
-        }
-      ]
+      "boardId": "fb6650e3-50a8-4272-825e-79b85afa7436"
     },
     {
-      "id": "1a544ae6-9aaf-4878-85f5-028bae537c9d",
-      "title": "aaaa",
-      "createdDate": "2025-02-12T16:11:08.837Z",
+      "id": "baabe817-4765-4263-a5fd-36edf4a339e1",
+      "title": "aaa",
+      "createdDate": "2025-02-13T18:25:45.161Z",
       "color": "gray",
       "isArchived": false,
       "boardId": "1",
-      "tasks": [
-        {
-          "title": "aaa"
-        }
-      ]
+      "tasks": []
+    },
+    {
+      "id": "9d892e24-277c-4210-a020-48ece77f4f15",
+      "title": "adsas",
+      "createdDate": "2025-02-13T18:28:51.899Z",
+      "color": "gray",
+      "isArchived": false,
+      "boardId": "1",
+      "tasks": []
+    },
+    {
+      "id": "166d33ca-dd56-4d1e-a53f-a7303d49bfb7",
+      "title": "sadasds",
+      "createdDate": "2025-02-13T18:28:53.208Z",
+      "color": "gray",
+      "isArchived": false,
+      "boardId": "1",
+      "tasks": []
+    },
+    {
+      "id": "39bd0126-5233-49f9-bb1e-06e9e508212f",
+      "title": "dasdasd",
+      "createdDate": "2025-02-13T18:28:54.471Z",
+      "color": "gray",
+      "isArchived": false,
+      "boardId": "1",
+      "tasks": []
+    },
+    {
+      "id": "0986cca9-170c-4f85-bb72-b671a2979524",
+      "title": "dasdas",
+      "createdDate": "2025-02-13T18:28:56.455Z",
+      "color": "gray",
+      "isArchived": false,
+      "boardId": "1",
+      "tasks": []
     }
-  ]
+  ],
+  "tasks": []
 }

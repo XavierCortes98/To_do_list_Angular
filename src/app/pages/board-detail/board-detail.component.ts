@@ -45,6 +45,16 @@ export class BoardDetailComponent implements OnInit {
     this.clearTitle();
   }
 
+  removeList(listId: string) {
+    this.listService.removeList(listId).subscribe((response) => {
+      console.log(response);
+      this.lists = this.lists.filter(
+        (list) => !response.deletedList.includes(list.id)
+      );
+      console.log(this.lists);
+    });
+  }
+
   openInput(event: Event) {
     event.stopPropagation();
     this.toggleInput();

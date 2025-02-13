@@ -23,8 +23,18 @@ export class AuthService {
     );
   }
 
-  register(user: User): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, user);
+  register(user: User) {
+    return this.http
+      .post<{ token: string }>(`${this.apiUrl}/register`, user)
+      .pipe(
+        catchError(this.handleError),
+        tap((response) => {
+          if (response.token) {
+            console.log('token');
+            this.tokenService.saveToken(response.token);
+          }
+        })
+      );
   }
 
   logout() {
@@ -37,12 +47,12 @@ export class AuthService {
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Ocurrió un error';
+    console.log('service:', error);
 
-    if (error.status === 401) {
-      errorMessage = error.error.message; // "Usuario no encontrado" o "Contraseña incorrecta"
-      console.log('service:', errorMessage);
+    if (error.error?.message) {
+      errorMessage = error.error.message;
     }
 
-    return throwError(errorMessage);
+    return throwError(() => new Error(errorMessage));
   }
 }

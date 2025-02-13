@@ -3,6 +3,7 @@
     *ngFor="let list of lists"
     class="pe-4"
     [listData]="list"
+    (removeListId)="removeList($event)"
   ></app-list>
 
   <div
@@ -25,6 +26,7 @@
         class="form-control w-100"
         [(ngModel)]="listTitle"
         placeholder="Introduce el nombre de la lista"
+        (keyup.enter)="addList()"
         autofocus
       />
       <div class="d-flex align-items-center">

@@ -54,29 +54,22 @@ export class LoginComponent implements OnInit {
     if (this.authForm.invalid) return;
 
     const { email, password } = this.authForm.value;
+    const authObservable = this.isLogin
+      ? this.authService.login({ email, password })
+      : this.authService.register({ email, password });
 
-    this.authService
-      .login({
-        email,
-        password,
-      })
-      .subscribe({
-        next: (response) => {
-          console.log('exito');
-        },
-        error: (error) => {
-          console.error('error:', error);
-          this.errorMsg = error;
-        },
-      });
-
-    this.dialogRef.close(this.authForm.value);
+    authObservable.subscribe({
+      next: () => this.dialogRef.close(this.authForm.value),
+      error: (error) => (this.errorMsg = error?.message || 'Ocurrió un error'),
+    });
   }
 
   private updateFormValidators() {
     if (this.isLogin) {
       this.authForm.get('confirmPassword')?.clearValidators();
       this.authForm.get('confirmPassword')?.setErrors(null);
+      this.authForm.get('confirmPassword')?.setValue(null);
+      this.errorMsg = '';
     } else {
       this.authForm
         .get('confirmPassword')

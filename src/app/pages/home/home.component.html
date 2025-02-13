@@ -5,11 +5,19 @@
     >
       <h3 class="p-2 fs-3">Tus espacios de trabajo</h3>
 
-      <button mat-button (click)="logout()" *ngIf="isLogged">Log out</button>
+      <button mat-stroked-button (click)="logout()" *ngIf="isLogged">
+        Log out
+      </button>
     </div>
-    <button *ngIf="!isLogged" mat-button (click)="openLoginModal()">
-      Iniciar sesion
-    </button>
+    <div
+      *ngIf="!isLogged"
+      class="d-flex flex-column align-items-center w-100 gap-2 p-2"
+    >
+      Inicia sesión para empezar a organizar tus proyectos
+      <button mat-stroked-button (click)="openLoginModal()">
+        Iniciar sesion
+      </button>
+    </div>
     <div *ngIf="isLogged">
       <div class="d-flex flex-row ps-3 pb-2">
         <button class="d-flex" mat-stroked-button (click)="openBoardModal()">

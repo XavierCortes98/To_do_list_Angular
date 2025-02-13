@@ -1,0 +1,11 @@
+.error {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  color: red;
+}
+
+.error mat-icon {
+  color: red;
+}

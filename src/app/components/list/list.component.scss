@@ -36,3 +36,15 @@
 textarea {
   resize: none;
 }
+
+.empty-message {
+  color: #44546f;
+  font-style: oblique;
+}
+
+.cdk-drag-placeholder {
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 2px solid #000;
+  border-radius: 8px;
+  opacity: 0.5;
+}

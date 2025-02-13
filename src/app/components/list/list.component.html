@@ -1,7 +1,48 @@
 <mat-card class="card" [class.collapsed]="isCollapsed">
   <div
-    class="d-flex align-items-center justify-content-between pt-2 px-3 list-header"
-    [class.collapsed]="isCollapsed"
+    *ngIf="!isCollapsed"
+    class="d-flex align-items-start justify-content-between pt-2 px-3 gap-2 list-header"
+  >
+    <button
+      mat-button
+      *ngIf="!showInputTitle"
+      (click)="toggleRenameInput()"
+      class="w-100 p-2 justify-content-start"
+    >
+      <span class="fs-6" [class.text_collapsed]="isCollapsed">
+        {{ listData.title }}
+      </span>
+    </button>
+    <input
+      *ngIf="showInputTitle"
+      class="form-control"
+      placeholder="Introduzca la tarea"
+      [(ngModel)]="cardTitle"
+      (keyup.enter)="toggleRenameInput()"
+      autofocus
+    />
+    <button
+      *ngIf="!showInputTitle"
+      class="btn rounded-5"
+      (click)="removeList()"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button
+      *ngIf="showInputTitle"
+      class="btn rounded-5"
+      (click)="toggleRenameInput()"
+    >
+      <mat-icon>check</mat-icon>
+    </button>
+    <button class="btn rounded-5" (click)="toggleCollapse()">
+      <mat-icon>compare_arrows</mat-icon>
+    </button>
+  </div>
+
+  <div
+    *ngIf="isCollapsed"
+    class="d-flex align-items-center justify-content-between pt-2 px-3 list-header collapsed"
   >
     <h3 class="fs-6" [class.text_collapsed]="isCollapsed">
       {{ listData.title }}
@@ -9,7 +50,7 @@
     <button class="btn rounded-5" (click)="toggleCollapse()">
       <mat-icon>compare_arrows</mat-icon>
     </button>
-    <span *ngIf="isCollapsed">{{ listData.tasks.length }}</span>
+    <span>{{ listData.tasks.length }}</span>
   </div>
 
   <div
@@ -19,9 +60,13 @@
     (cdkDropListDropped)="moveTask($event)"
     class="px-3 pb-1 pt-2"
   >
+    <span *ngIf="!listData.tasks.length" class="empty-message p-2"
+      >Arrastra aqui las tareas</span
+    >
     <app-task
       *ngFor="let task of listData.tasks"
       cdkDrag
+      [cdkDragData]="task"
       class="d-flex p-1"
       (taskToRemove)="removeTask($event)"
       [task]="task"
