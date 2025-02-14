@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-around w-100 p-3">
+<div class="d-flex justify-content-around w-100 p-3 background">
   <div class="w-75 gap-2">
     <div
       class="d-flex flex-row w-100 justify-content-between align-items-center"
@@ -11,18 +11,20 @@
     </div>
     <div
       *ngIf="!isLogged"
-      class="d-flex flex-column align-items-center w-100 gap-2 p-2"
+      class="d-flex flex-column align-items-center justify-content-center w-100 gap-2 p-2"
     >
-      Inicia sesión para empezar a organizar tus proyectos
-      <button mat-stroked-button (click)="openLoginModal()">
-        Iniciar sesion
+      <span class="text-center">
+        Inicia sesión para empezar a organizar tus proyectos
+      </span>
+      <button mat-stroked-button (click)="openLoginModal()" class="login">
+        <span> Iniciar sesion </span>
       </button>
     </div>
     <div *ngIf="isLogged">
       <div class="d-flex flex-row ps-4 pb-4">
-        <button class="d-flex" mat-stroked-button (click)="openBoardModal()">
+        <button class="d-flex a" mat-stroked-button (click)="openBoardModal()">
           <mat-icon>add</mat-icon>
-          Crear nuevo tablero
+          <span> Crear nuevo tablero </span>
         </button>
       </div>
       <div class="grid-container">

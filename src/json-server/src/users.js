@@ -1,4 +1,10 @@
-import { createToken, hashPassword, comparePassword } from "./auth.js";
+import {
+  createToken,
+  hashPassword,
+  comparePassword,
+  verifyRefresh,
+  REFRESH_KEY,
+} from "./auth.js";
 import { v4 as uuidv4 } from "uuid";
 const userRoutes = (server, router) => {
   const db = router.db;
@@ -39,13 +45,37 @@ const userRoutes = (server, router) => {
     }
 
     const token = createToken({ email, userId: user.id });
-
+    const refreshToken = createToken({ userId: user.id }, REFRESH_KEY, "7d");
     const userBoards = db
       .get("boards")
       .filter((board) => board.user_id === user.id)
       .value();
 
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
     return res.status(200).json({ token, userBoards });
+  });
+
+  server.post("/refresh", async (req, res) => {
+    const refreshToken = req.cookies.refreshToken;
+
+    if (!refreshToken) {
+      return res.status(401).json({ message: "Refresh token requerido" });
+    }
+
+    try {
+      const user = await verifyRefresh(refreshToken);
+
+      const token = createToken({ userId: user.userId });
+      return res.status(200).json({ token });
+    } catch (error) {
+      return res.status(403).json({ message: "Token inválido" });
+    }
   });
 };
 

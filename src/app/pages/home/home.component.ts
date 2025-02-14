@@ -27,11 +27,10 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this.isLogged = this.authService.isLogged();
-    if (this.isLogged) {
-      this.boardService.getBoards().subscribe((boards) => {
-        this.boardList = boards;
-      });
-    }
+
+    this.boardService.getBoards().subscribe((boards) => {
+      this.boardList = boards;
+    });
 
     this.newBoardForm = this.fb.group({
       title: ['', Validators.required],

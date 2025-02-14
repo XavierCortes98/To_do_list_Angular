@@ -1,11 +1,11 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
-const SECRET_KEY = "secret_key";
-const expiresIn = "1h";
+export const SECRET_KEY = "secret_key";
+export const REFRESH_KEY = "refresh_key";
 
-export function createToken(payload) {
-  return jwt.sign(payload, SECRET_KEY, { algorithm: "HS256", expiresIn });
+export function createToken(payload, key = SECRET_KEY, expiresIn = "60m") {
+  return jwt.sign(payload, key, { algorithm: "HS256", expiresIn });
 }
 
 export function hashPassword(password) {
@@ -30,4 +30,16 @@ export function verifyToken(req, res, next) {
   } catch (error) {
     return res.status(401).json({ message: "Token inválido o expirado" });
   }
+}
+
+export function verifyRefresh(token) {
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, REFRESH_KEY, (err, user) => {
+      if (err) {
+        reject("Invalid Refresh Token");
+      } else {
+        resolve(user);
+      }
+    });
+  });
 }

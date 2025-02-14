@@ -5,7 +5,6 @@ const boardsRoutes = (server, router) => {
 
   server.post("/new-board", verifyToken, (req, res) => {
     const { title } = req.body;
-    console.log(title);
     const user_id = req.user.userId;
     const id = uuidv4();
     db.get("boards").push({ id, title, user_id }).write();
@@ -16,8 +15,6 @@ const boardsRoutes = (server, router) => {
   server.get("/boards", verifyToken, (req, res) => {
     const user_id = req.user.userId;
     const userBoards = db.get("boards").filter({ user_id }).value();
-    console.log(req.user);
-
     return res.status(201).json(userBoards);
   });
 };

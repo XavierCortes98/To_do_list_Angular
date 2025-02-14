@@ -1,6 +1,7 @@
 import jsonServer from "json-server";
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 import boardsRoutes from "./src/boards.js";
 import listRoutes from "./src/lists.js";
@@ -12,7 +13,8 @@ const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
 
 server.use(middlewares);
-server.use(cors());
+server.use(cookieParser());
+server.use(cors({ origin: "http://localhost:4200", credentials: true }));
 server.use(express.json());
 
 userRoutes(server, router);

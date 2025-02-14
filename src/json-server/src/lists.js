@@ -40,7 +40,6 @@ const listRoutes = (server, router) => {
       boardId,
       tasks: [],
     };
-    console.log("Objeto creado:", newList);
     db.get("lists").push(newList).write();
 
     return res.status(201).json({ message: "Tarea agregada", newList });
