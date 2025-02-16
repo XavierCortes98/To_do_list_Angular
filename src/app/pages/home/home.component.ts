@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Board } from 'src/app/models/board.model';
 import { BoardService } from 'src/app/services/board.service';
 import { LoginComponent } from 'src/app/components/login/login.component';
+import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -39,7 +40,9 @@ export class HomeComponent {
   }
 
   openLoginModal(): void {
-    const dialogRef = this.dialog.open(LoginComponent, { width: '400px' });
+    const dialogRef = this.dialog.open(LoginComponent, {
+      width: '400px',
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (!result) return;
@@ -62,14 +65,31 @@ export class HomeComponent {
   openBoardModal(): void {
     const dialogRef = this.dialog.open(NewBoardComponent, {
       width: '400px',
+      disableClose: true,
+      autoFocus: true,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.boardList.push({
-          title: result.title,
-          image: 'abc',
-          isFavorite: false,
+          id: result.newBoard.id,
+          title: result.newBoard.title,
+        });
+      }
+    });
+  }
+
+  deleteBoard(boardId: string) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.boardService.deleteBoard(boardId).subscribe(() => {
+          this.boardList = this.boardList.filter(
+            (board) => board.id !== boardId
+          );
         });
       }
     });
@@ -79,12 +99,5 @@ export class HomeComponent {
     this.authService.logout();
     this.isLogged = this.authService.isLogged();
     this.boardList = [];
-  }
-
-  register() {
-    this.authService.login({
-      email: 'b@gmail.com',
-      password: '123456',
-    });
   }
 }

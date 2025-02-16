@@ -24,20 +24,12 @@
       "user_id": "dafc0649-def0-4cf8-8ad3-741f06b86818"
     },
     {
-      "id": "fb6650e3-50a8-4272-825e-79b85afa7436",
-      "title": "a",
+      "id": "ec891033-e0c4-4303-9019-1ce15348682e",
+      "title": "dasdsa",
       "user_id": "dafc0649-def0-4cf8-8ad3-741f06b86818"
     }
   ],
   "lists": [
-    {
-      "id": "1",
-      "title": "Por Hacer",
-      "createdDate": "2024-02-10T12:00:00Z",
-      "color": "#ff5733",
-      "isArchived": false,
-      "boardId": "fb6650e3-50a8-4272-825e-79b85afa7436"
-    },
     {
       "id": "baabe817-4765-4263-a5fd-36edf4a339e1",
       "title": "aaa",
@@ -66,5 +58,11 @@
       "tasks": []
     }
   ],
-  "tasks": []
+  "tasks": [
+    {
+      "id": "6e5427b7-ae9c-4c38-b6b5-71abff1c97e2",
+      "title": "sdasdas",
+      "listId": "baabe817-4765-4263-a5fd-36edf4a339e1"
+    }
+  ]
 }

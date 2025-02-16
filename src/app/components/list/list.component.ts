@@ -1,14 +1,11 @@
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
+
+import { KanbanService } from 'src/app/services/kanban.service';
+import { ListService } from 'src/app/services/list.service';
+import { TaskService } from '../../services/task.service';
 import { List } from 'src/app/models/list.model';
 import { Task } from 'src/app/models/task.model';
-import { KanbanService } from 'src/app/services/kanban.service';
-import { TaskService } from '../../services/task.service';
-import { ListService } from 'src/app/services/list.service';
 
 @Component({
   selector: 'app-list',
@@ -17,14 +14,15 @@ import { ListService } from 'src/app/services/list.service';
 })
 export class ListComponent {
   @Input() listData!: List;
-  @Output() collapsed = new EventEmitter<boolean>();
+
   @Output() removeListId = new EventEmitter<string>();
+  @Output() collapsed = new EventEmitter<boolean>();
+
   showInputTitle = false;
   showInput = false;
+
   isCollapsed = false;
   cardTitle = '';
-
-  movedTask: any;
 
   constructor(
     private kanbanService: KanbanService,
@@ -35,7 +33,6 @@ export class ListComponent {
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;
     if (this.showInputTitle) this.toggleRenameInput();
-    this.collapsed.emit(this.isCollapsed);
   }
 
   toggleRenameInput() {
@@ -71,7 +68,7 @@ export class ListComponent {
   }
 
   removeTask(task: Task) {
-    this.taskService.deleteTask(task.id!).subscribe((a) => console.log(a));
+    this.taskService.deleteTask(task.id!).subscribe();
     this.listData.tasks = this.listData.tasks.filter((t) => t.id !== task.id);
   }
 
@@ -81,7 +78,6 @@ export class ListComponent {
     const isSameContainer = previousContainer.id === container.id;
 
     const movedTask = dropEvent.item.data;
-    console.log('Task moved:', movedTask.id);
     isSameContainer
       ? this.kanbanService.reorderTask(
           this.listData.tasks,
@@ -111,7 +107,7 @@ export class ListComponent {
 
   adjustHeight(event: Event): void {
     const element = event.target as HTMLTextAreaElement;
-    element.style.height = 'auto'; // Restablece la altura
-    element.style.height = `${element.scrollHeight}px`; // Ajusta según el contenido
+    element.style.height = 'auto';
+    element.style.height = `${element.scrollHeight}px`;
   }
 }

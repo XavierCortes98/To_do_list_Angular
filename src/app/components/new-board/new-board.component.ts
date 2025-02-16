@@ -29,8 +29,9 @@ export class NewBoardComponent implements OnInit {
 
   onCreate(): void {
     if (this.newBoardForm.valid) {
-      this.boardService.createBoard(this.newBoardForm.value).subscribe();
-      this.dialogRef.close(this.newBoardForm.value);
+      this.boardService
+        .createBoard(this.newBoardForm.value)
+        .subscribe((response) => this.dialogRef.close(response));
     }
   }
 }

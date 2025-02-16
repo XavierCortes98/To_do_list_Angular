@@ -25,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { LoginComponent } from './components/login/login.component';
     BoardDetailComponent,
     ClickOutsideDirective,
     LoginComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserAnimationsModule,

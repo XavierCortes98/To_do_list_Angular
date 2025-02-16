@@ -16,6 +16,13 @@ export class BoardService {
   }
 
   createBoard(board: Board): Observable<any> {
-    return this.http.post(`${this.apiUrl}/new-board`, board);
+    return this.http.post(`${this.apiUrl}/boards`, board);
+  }
+
+  deleteBoard(boardId: string): Observable<any> {
+    const body = {
+      boardId,
+    };
+    return this.http.delete(`${this.apiUrl}/boards`, { body });
   }
 }

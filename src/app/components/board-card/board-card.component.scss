@@ -1,15 +1,16 @@
 .grid-item mat-icon {
   opacity: 0;
   transition: opacity 0.3s ease, color 0.3s ease, transform 0.3s ease;
+
+  &:hover mat-icon {
+    opacity: 1;
+  }
 }
 
 .grid-item button {
   position: relative;
   z-index: 2;
-}
-
-.grid-item:hover mat-icon {
-  opacity: 1;
+  color: white;
 }
 
 .grid-item img {
@@ -27,37 +28,6 @@
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 1);
 }
 
-.favorite-active {
-  color: red;
-  animation: heartBeat 0.3s ease-in-out;
-}
-.not-favorite {
-  animation: heartBeatOff 0.3s ease-in-out;
-  color: white;
-}
-
-@keyframes heartBeat {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-@keyframes heartBeatOff {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(0.8);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
 .grid-item a::before {
   content: "";
   position: absolute;

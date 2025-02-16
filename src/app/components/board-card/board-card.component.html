@@ -6,12 +6,8 @@
   <button
     mat-button
     class="position-absolute bottom-0 end-0 m-0"
-    (click)="toggleFav()"
+    (click)="deleteBoard()"
   >
-    <mat-icon
-      [ngClass]="boardInfo.isFavorite ? 'favorite-active' : 'not-favorite'"
-    >
-      favorite
-    </mat-icon>
+    <mat-icon> delete </mat-icon>
   </button>
 </div>

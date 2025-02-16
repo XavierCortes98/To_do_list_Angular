@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Board } from 'src/app/models/board.model';
 
 @Component({
@@ -8,8 +8,9 @@ import { Board } from 'src/app/models/board.model';
 })
 export class BoardCardComponent {
   @Input() boardInfo!: Board;
+  @Output() boardDelete: EventEmitter<string> = new EventEmitter<string>();
 
-  toggleFav() {
-    this.boardInfo.isFavorite = !this.boardInfo.isFavorite;
+  deleteBoard() {
+    this.boardDelete.emit(this.boardInfo.id);
   }
 }
