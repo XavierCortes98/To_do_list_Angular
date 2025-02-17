@@ -11,11 +11,7 @@
       (removeListId)="removeList($event)"
     ></app-list>
 
-    <div
-      clickOutside
-      (clickOutside)="onClickOutside()"
-      style="height: fit-content"
-    >
+    <div clickOutside (clickOutside)="onClickOutside()">
       <button
         *ngIf="!showInput"
         class="add-button p-2 gap-2"

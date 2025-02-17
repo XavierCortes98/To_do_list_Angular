@@ -1,8 +1,5 @@
 <mat-card class="card" [class.collapsed]="isCollapsed">
-  <div
-    *ngIf="!isCollapsed"
-    class="d-flex align-items-start justify-content-between pt-2 px-3 gap-2 list-header"
-  >
+  <div *ngIf="!isCollapsed" class="pt-2 px-3 gap-2 list-header">
     <button
       mat-button
       *ngIf="!showInputTitle"
@@ -23,31 +20,30 @@
     />
     <button
       *ngIf="!showInputTitle"
-      class="btn rounded-5"
+      mat-icon-button
       (click)="removeList()"
+      class="d-flex"
     >
       <mat-icon>delete</mat-icon>
     </button>
     <button
       *ngIf="showInputTitle"
-      class="btn rounded-5"
+      class="d-flex"
+      mat-icon-button
       (click)="toggleRenameInput()"
     >
       <mat-icon>check</mat-icon>
     </button>
-    <button class="btn rounded-5" (click)="toggleCollapse()">
+    <button class="d-flex" mat-icon-button (click)="toggleCollapse()">
       <mat-icon>compare_arrows</mat-icon>
     </button>
   </div>
 
-  <div
-    *ngIf="isCollapsed"
-    class="d-flex align-items-center justify-content-between pt-2 px-3 list-header collapsed"
-  >
+  <div *ngIf="isCollapsed" class="pt-2 px-3 list-header collapsed">
     <h3 class="fs-6" [class.text_collapsed]="isCollapsed">
       {{ listData.title }}
     </h3>
-    <button class="btn rounded-5" (click)="toggleCollapse()">
+    <button class="d-flex" mat-icon-button (click)="toggleCollapse()">
       <mat-icon>compare_arrows</mat-icon>
     </button>
     <span>{{ listData.tasks.length }}</span>

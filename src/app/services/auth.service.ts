@@ -46,7 +46,6 @@ export class AuthService {
         catchError(this.handleError),
         tap((response) => {
           if (response.token) {
-            console.log('token');
             this.tokenService.saveToken(response.token);
           }
         })
@@ -64,7 +63,6 @@ export class AuthService {
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Ocurrió un error';
-    console.log('service:', error);
 
     if (error.error?.message) {
       errorMessage = error.error.message;

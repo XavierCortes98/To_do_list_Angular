@@ -13,7 +13,6 @@ const boardsRoutes = (server, router) => {
     };
 
     db.get("boards").push(newBoard).write();
-    console.log("board", newBoard);
     return res
       .status(201)
       .json({ message: "Tablero agregado con exito", newBoard });

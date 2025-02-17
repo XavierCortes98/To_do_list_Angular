@@ -10,9 +10,9 @@ import { List } from 'src/app/models/list.model';
 })
 export class BoardDetailComponent implements OnInit {
   lists!: List[];
+  listTitle: string = '';
   boardId!: string;
   showInput = false;
-  listTitle: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -23,7 +23,6 @@ export class BoardDetailComponent implements OnInit {
     this.boardId = this.route.snapshot.paramMap.get('boardId')!;
     this.listService.getLists(this.boardId).subscribe((lists) => {
       this.lists = lists;
-      console.log('board get', lists);
     });
   }
 
@@ -32,12 +31,9 @@ export class BoardDetailComponent implements OnInit {
     this.listService
       .postList(this.listTitle, this.boardId)
       .subscribe((response) => {
-        console.log(response);
         this.lists.push({
           id: response.newList.id,
           title: response.newList.title,
-          color: 'gray',
-          isArchived: false,
           tasks: [],
         });
       });
@@ -47,11 +43,9 @@ export class BoardDetailComponent implements OnInit {
 
   removeList(listId: string) {
     this.listService.removeList(listId).subscribe((response) => {
-      console.log(response);
       this.lists = this.lists.filter(
         (list) => !response.deletedList.includes(list.id)
       );
-      console.log(this.lists);
     });
   }
 

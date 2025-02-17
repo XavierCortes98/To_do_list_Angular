@@ -66,7 +66,6 @@ export class AuthInterceptor implements HttpInterceptor {
           this.refreshTokenSubject.next(newToken);
 
           localStorage.setItem('token', newToken);
-          console.log('reintento');
           return next.handle(
             request.clone({
               setHeaders: { Authorization: `Bearer ${newToken}` },
