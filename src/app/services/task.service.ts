@@ -20,6 +20,6 @@ export class TaskService {
   }
 
   moveTask(newListId: string, taskId: string) {
-    return this.http.put(`${this.apiUrl}/tasks`, { newListId, taskId });
+    return this.http.patch(`${this.apiUrl}/tasks`, { newListId, taskId });
   }
 }

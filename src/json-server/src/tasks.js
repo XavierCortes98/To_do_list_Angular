@@ -39,7 +39,7 @@ const taskRoutes = (server, router) => {
       .json({ message: "Tarea eliminada correctamente", task });
   });
 
-  server.put("/tasks", verifyToken, (req, res) => {
+  server.patch("/tasks", verifyToken, (req, res) => {
     const { taskId, newListId } = req.body;
 
     if (!taskId || !newListId) {
